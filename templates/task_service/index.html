@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <ul>
+    <li>
+      <h1>
+          <strong>TODO list</strong>
+          <a style="float: right" href="{% url 'task_service:task-create' %}" class="btn btn-primary link-to-page">
+          Add task
+          </a>
+      </h1>
+    </li>
+      {% for task in tasks %}
+        <br>
+        <li>
+          {% if task.confirmation == 1 %}
+            <strong>
+              {{ task.content }}
+            </strong>
+            <strong style="color: green">
+              Done
+              <a style="float: right" href="{% url 'task_service:undo' pk=task.pk%}"
+                class="btn-1">
+                Undo
+              </a>
+            </strong>
+            <br>
+          {% else %}
+            <strong>
+              {{ task.content }}
+            </strong>
+            <strong style="color: red">
+              Not done
+              <a style="float: right" href="{% url 'task_service:complete' pk=task.pk%}"
+                class="btn-1">
+                Complete
+              </a>
+            </strong>
+            <br>
+          {% endif %}
+        </li>
+        <br>
+        <li>
+          {% if task.optional_deadline  %}
+            Created: {{ task.datetime }}
+            <strong style="color: brown">
+              Deadline: {{ task.optional_deadline }}
+            </strong>
+          {% endif %}
+        </li>
+        <br>
+        <li>
+          <h4 style="color: gray">
+            Tags: {{ task.tags.name }}
+            <strong style="color: dodgerblue">
+                <a href="{% url 'task_service:tags-update' pk=task.tags.id %}" class="btn btn-secondary link-to-page">
+             Update
+             </a>
+                  <a href="{% url 'task_service:tags-delete' pk=task.tags.id %}" class="btn btn-danger link-to-page">
+             Delete
+                  </a>
+            </strong>
+          </h4>
+        </li>
+      {% endfor %}
+    </ul>
+{% endblock %}
