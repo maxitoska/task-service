@@ -6,5 +6,10 @@
     {% csrf_token %}
 
     <input type="submit" value="Yes" class="btn btn-danger">
+    <a style="background-color: gray" href="{% url 'task_service:index'%}"
+     class="btn btn-secondary">
+     cancel
+    </a>
   </form>
+
 {% endblock %}

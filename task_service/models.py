@@ -16,7 +16,7 @@ class Task(models.Model):
     tags = models.ForeignKey(Tags, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ["optional_deadline"]
+        ordering = ["tags"]
 
     def __str__(self):
         return f"{self.content}" \
