@@ -32,9 +32,6 @@ class TaskCreateView(generic.CreateView):
     template_name = "task_service/task_form.html"
     success_url = reverse_lazy("task_service:index")
 
-    # def get_absolute_url(self):
-    #     return reverse("task_service:???")
-
 
 class TagsUpdateView(generic.UpdateView):
     model = Tags
