@@ -1,9 +1,9 @@
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
+from task_service.forms import TaskForm
 from task_service.models import Task, Tags
 
 
@@ -27,8 +27,9 @@ class TagsCreateView(generic.CreateView):
 
 
 class TaskCreateView(generic.CreateView):
-    model = Task
-    fields = "__all__"
+    model_form = Task
+    form_class = TaskForm
+    template_name = "task_service/task_form.html"
     success_url = reverse_lazy("task_service:index")
 
 
